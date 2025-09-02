@@ -51,7 +51,67 @@
     .footer { position:absolute; bottom:14px; width:100%; text-align:center; font-size:12px; opacity:.7; }
   </style>
 </head>
-<body>
+<!-- Botón de Spotify -->
+<a href="https://open.spotify.com/playlist/667pJ8ghnKVWUZqSotTCYy?si=574a97ebadc548d1" 
+   target="_blank" 
+   class="spotify-btn" 
+   aria-label="Abrir La Playlist de La Gala en Spotify">
+  🎷 La Playlist de Jazz
+</a>
+
+<style>
+  .spotify-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1db954;
+    color: white;
+    font-weight: bold;
+    padding: 12px 18px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+    transition: background .2s ease, transform .2s ease;
+    z-index: 9999;
+  }
+  .spotify-btn:hover {
+    background: #1ed760;
+    transform: scale(1.05);
+  }
+</style>
+ <!-- Botón de Spotify -->
+<a href="https://open.spotify.com/playlist/667pJ8ghnKVWUZqSotTCYy?si=574a97ebadc548d1" 
+   target="_blank" 
+   class="spotify-btn" 
+   aria-label="Abrir La Playlist de La Gala en Spotify">
+  🎷 La Playlist de Jazz
+</a>
+
+<style>
+  .spotify-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1db954;
+    color: white;
+    font-weight: bold;
+    padding: 12px 18px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+    transition: background .2s ease, transform .2s ease;
+    z-index: 9999;
+  }
+  .spotify-btn:hover {
+    background: #1ed760;
+    transform: scale(1.05);
+  }
+</style>
+  <body>
   <main class="stage" aria-label="Landing de La Gala">
     <video id="bg" class="bg-video" autoplay muted loop playsinline poster="poster.jpg">
       <source src="video página.webm" type="video/webm" />
