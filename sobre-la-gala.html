@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sobre La Gala — Información oficial</title>
+
+  <meta name="description" content="Conoce qué es La Gala, la programación, cuándo comienza (ajustado a tu zona horaria) y quiénes participan." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root { --accent:#e6c46a; --text:#f7f6f2; --muted:#cfc8b2; --bg:#0b0b0d; --card:rgba(15,15,17,.65); }
+    * { box-sizing: border-box; }
+    html, body { height:100%; }
+    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, 'Noto Sans';
+           color:var(--text); background:radial-gradient(120% 120% at 50% -10%, #151518, #0b0b0d 60%); }
+
+    /* NAV */
+    .nav { position:sticky; top:0; z-index:10; backdrop-filter:saturate(1.1) blur(10px);
+           background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,0));
+           border-bottom:1px solid rgba(255,255,255,.06); }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:1100px; margin:0 auto; padding:14px 20px; }
+    .brand { font-family:'Playfair Display', serif; font-weight:700; letter-spacing:.02em; font-size:20px; color:var(--accent); }
+    .nav a { color:var(--text); text-decoration:none; opacity:.9; font-weight:600; }
+    .btn { display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(230,196,106,.35); background:rgba(14,14,16,.55);
+           color:var(--text); padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:600;
+           transition:transform .08s ease, background .15s ease, border-color .15s ease; backdrop-filter:blur(4px); text-decoration:none; }
+    .btn:hover { border-color:var(--accent); }
+    .btn:active { transform:scale(.98); }
+
+    /* Banner de fecha + mini countdown */
+    .banner { position:relative; display:flex; justify-content:center; gap:10px; padding:10px 12px; background:rgba(230,196,106,.12);
+              border-bottom:1px solid rgba(230,196,106,.28); flex-wrap:wrap; }
+    .pill { display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:999px; background:rgba(14,14,16,.55);
+            border:1px solid rgba(230,196,106,.35); box-shadow:0 6px 18px rgba(0,0,0,.25); font-weight:700; }
+    .pill .sep { opacity:.5; }
+    .pill small { font-weight:600; opacity:.9; }
+    .mini-counter { display:flex; gap:10px; align-items:center; padding:8px 12px; border-radius:999px; background:rgba(14,14,16,.5);
+                    border:1px solid rgba(230,196,106,.28); font-variant-numeric:tabular-nums; font-size:12px; }
+    .mini-counter b { color:var(--accent); font-family:'Playfair Display', serif; font-size:14px; }
+
+    /* HERO */
+    .hero { position:relative; padding:42px 20px 18px; text-align:center; }
+    .title { position:relative; display:inline-block; font-family:'Playfair Display', serif; font-weight:700;
+             font-size:clamp(28px,6vw,56px); margin:0 0 10px; text-shadow:0 2px 24px rgba(0,0,0,.5); }
+    .subtitle { margin:0; opacity:.9; }
+
+    .title::after{
+      content:""; position:absolute; inset:-10% -20%; pointer-events:none;
+      background: linear-gradient(120deg, rgba(230,196,106,0) 20%, rgba(230,196,106,.55) 50%, rgba(230,196,106,0) 80%);
+      transform: translateX(-120%) skewX(-12deg); filter: blur(6px); mix-blend-mode:screen; opacity:0; animation: shine 16s linear infinite;
+    }
+    @keyframes shine{ 0%{transform: translateX(-120%) skewX(-12deg); opacity:0;} 6%{opacity:.9;} 12%{transform: translateX(120%) skewX(-12deg); opacity:0;} 100%{opacity:0;} }
+
+    .container { max-width:1100px; margin:0 auto; padding:22px 20px 64px; }
+    .card { background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:18px 18px; box-shadow:0 10px 28px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05); margin-bottom:22px; }
+    h2 { font-family:'Playfair Display', serif; margin:0 0 10px; font-size:28px; }
+    p { margin:0 0 12px; line-height:1.62; color:#efece3; }
+    .muted { color:var(--muted); }
+
+    /* Divisor animado */
+    .divider-anim {
+      height: 2px;
+      margin: 22px 0;
+      background: linear-gradient(90deg, rgba(230,196,106,0), rgba(230,196,106,.85), rgba(230,196,106,0));
+      background-size: 200% 100%;
+      animation: shimmer 3s linear infinite;
+      border-radius: 999px;
+      box-shadow: 0 0 12px rgba(230,196,106,.3);
+    }
+    @keyframes shimmer { 0% { background-position-x: 0%; } 100% { background-position-x: 200%; } }
+
+    .cta-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:8px; }
+
+    /* Drop cap (inicial capital) para el primer párrafo del bloque intro */
+    .intro p:first-of-type::first-letter{
+      float:left;
+      font-family:'Playfair Display', serif;
+      font-size:3.1em;
+      line-height:0.9;
+      padding-right:8px;
+      color: var(--accent);
+      text-shadow: 0 2px 10px rgba(0,0,0,.4);
+    }
+
+    /* Invitados */
+    .guests { display:grid; grid-template-columns:1fr; gap:10px; }
+    @media (min-width:700px){ .guests { grid-template-columns:1fr 1fr; } }
+    .guest { display:flex; align-items:center; gap:10px; background:rgba(14,14,16,.45); border:1px solid rgba(255,255,255,.08);
+             border-radius:12px; padding:10px 12px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.04); }
+    .guest b { font-weight:700; }
+    .role { opacity:.85; font-size:.95em; }
+
+    /* Destello dorado para presentadores */
+    .presentador {
+      position:relative;
+      box-shadow: 0 0 0 1px rgba(230,196,106,.45), 0 0 18px rgba(230,196,106,.25), inset 0 0 0 1px rgba(230,196,106,.2);
+      background: linear-gradient(180deg, rgba(230,196,106,.12), rgba(14,14,16,.45));
+    }
+    .presentador::after {
+      content:""; position:absolute; inset:-2px; border-radius:12px; pointer-events:none;
+      background: conic-gradient(from 0deg, rgba(230,196,106,.0), rgba(230,196,106,.6), rgba(230,196,106,.0) 30%);
+      filter: blur(8px); opacity:.0; animation: glow 3.5s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0% { opacity:.0; transform:rotate(0deg); }
+      50% { opacity:.35; }
+      100% { opacity:.0; transform:rotate(360deg); }
+    }
+
+    /* Programación con destello SOLO en nombres clave */
+    .highlight {
+      position:relative; color:var(--accent); font-weight:700;
+    }
+    .highlight::after {
+      content:""; position:absolute; inset:-5%; background:linear-gradient(120deg, rgba(230,196,106,0) 30%, rgba(230,196,106,.7) 50%, rgba(230,196,106,0) 70%);
+      transform:translateX(-120%) skewX(-12deg); filter:blur(4px); mix-blend-mode:screen; opacity:0;
+      animation:shine 10s linear infinite;
+    }
+    @keyframes shine {
+      0%{ transform:translateX(-120%) skewX(-12deg); opacity:0; }
+      10%{ opacity:1; }
+      25%{ transform:translateX(120%) skewX(-12deg); opacity:0; }
+      100%{ opacity:0; }
+    }
+    ul.programa { margin:0; padding:0; list-style:none; }
+    ul.programa li { margin:8px 0; padding-left:1.2em; position:relative; line-height:1.6; }
+    ul.programa li::before { content:"•"; position:absolute; left:0; color:var(--accent); }
+
+    .footer { text-align:center; font-size:12px; opacity:.75; padding:24px 20px 50px; }
+    .spotify-fab {
+      position: fixed; right: 20px; bottom: 20px; z-index: 20;
+      background:#1db954; color:#fff; border-radius:999px; padding:12px 16px; text-decoration:none; font-weight:700;
+      box-shadow:0 6px 18px rgba(0,0,0,.35);
+    }
+    .spotify-fab:hover{ background:#1ed760; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">La Gala</div>
+      <div class="nav-actions">
+        <a class="btn" href="index.html">⏳ Volver al contador</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner de fecha dinámico con mini-counter -->
+  <div class="banner">
+    <div class="pill" id="date-pill">
+      <span>🗓️</span>
+      <span id="uy">Dom 7 de septiembre • 22:00 (Uruguay)</span>
+      <span class="sep">•</span>
+      <small id="local">Tu hora: —</small>
+    </div>
+    <div class="mini-counter" id="miniC">
+      <span><b id="d">00</b>d</span>
+      <span><b id="h">00</b>h</span>
+      <span><b id="m">00</b>m</span>
+      <span><b id="s">00</b>s</span>
+    </div>
+  </div>
+
+  <header class="hero">
+    <h1 class="title">Sobre La Gala</h1>
+    <p class="subtitle">Una noche solemne, elegante y comunitaria</p>
+  </header>
+
+  <main class="container">
+    <!-- Intro -->
+    <section class="card intro">
+      <h2>¿Qué es La Gala?</h2>
+      <p>La Gala es un encuentro especial de la comunidad. Una ceremonia minimalista y cuidada, con estética de teatro y música de <strong>jazz</strong> como marco sonoro. Presentaremos proyectos del servidor de Discord. Entre ellos: ChainWorld, el servidor de mods de Nomi (con tráiler) y otras sorpresas.</p>
+      <p>Todo sucederá dentro de un <strong>servidor de Minecraft</strong>, para vivirlo como una <strong>gala virtual</strong>. También habrá <strong>transmisión en vivo</strong> y, si no podés estar, quedará grabado.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://drive.google.com/file/d/1p0VvseM8k4G5ptJCqXfWQ88hB3SAHwRj/view?usp=sharing" target="_blank" rel="noopener">📜 Invitación (PDF)</a>
+      </div>
+      <div class="divider-anim"></div>
+      <div class="card" style="background:rgba(14,14,16,.45); border-color:rgba(230,196,106,.25);">
+        <p style="margin:0;"><strong>La Gala</strong> es posible gracias a todos los que forman parte del servidor. Gracias por sostener esta comunidad y darle sentido a la noche.</p>
+      </div>
+    </section>
+
+    <!-- Programación -->
+    <section class="card">
+      <h2>Programación de La Gala</h2>
+      <ul class="programa">
+        <li>🎭 Inicio y bienvenida de La Gala — Presentadores Nomi y Zerah</li>
+        <li>🌐 <span class="highlight">ChainWorld</span> — Reflexiones, charlas y el futuro de ChainWorld en el servidor</li>
+        <li>🛠️ <span class="highlight">Servidor de Mods</span> — Tráiler y breve descripción de los mods</li>
+        <li>🎁 ¡Sorpresa!</li>
+        <li>🎉 Cierre de la Gala — Afterparty</li>
+      </ul>
+    </section>
+
+    <div class="divider-anim"></div>
+
+    <!-- Invitados -->
+    <section class="card">
+      <h2>Invitados</h2>
+      <div class="guests">
+        <div class="guest presentador"><b>Nomi</b> <span class="role">— Presentador</span></div>
+        <div class="guest"><b>Luki</b> <span class="role">— Dama de honor de Nomi • Invitado</span></div>
+        <div class="guest presentador"><b>Zerah</b> <span class="role">— Presentador</span></div>
+        <div class="guest"><b>Sergi338</b> <span class="role">— Invitado</span></div>
+        <div class="guest"><b>Ais</b> <span class="role">— Invitado</span></div>
+        <div class="guest"><b>Khata</b> <span class="role">— Invitado</span></div>
+        <div class="guest"><b>Kaleb</b> <span class="role">— Invitado</span></div>
+        <div class="guest"><b>Leandro</b> <span class="role">— Invitado</span></div>
+        <div class="guest"><b>ApolixoSland</b> <span class="role">— Invitado</span></div>
+        <div class="guest"><b>Agus</b> <span class="role">— Invitado</span></div>
+        <div class="guest"><b>Mate</b> <span class="role">— Invitado</span></div>
+        <div class="guest"><b>Rem</b> <span class="role">— Invitado</span></div>
+        <div class="guest"><b>Cross</b> <span class="role">— Invitado</span></div>
+        <div class="guest"><b>Dino</b> <span class="role">— Invitado</span></div>
+        <div class="guest"><b>Juan</b> <span class="role">— Invitado</span></div>
+        <div class="guest"><b>Iván / Pronthea</b> <span class="role">— Invitado</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Invitados especiales</h2>
+      <div class="guests">
+        <div class="guest"><b>ElRichMC</b> <span class="role">— Invitado especial</span></div>
+        <div class="guest"><b>Shadoune</b> <span class="role">— Invitado especial</span></div>
+        <div class="guest"><b>Farfadox</b> <span class="role">— Invitado especial</span></div>
+        <div class="guest"><b>Vegetta777</b> <span class="role">— Invitado especial</span></div>
+        <div class="guest"><b>TheWillyrex</b> <span class="role">— Invitado especial</span></div>
+        <div class="guest"><b>Luh_</b> <span class="role">— Invitado especial</span></div>
+        <div class="guest"><b>Gona89</b> <span class="role">— Invitado especial</span></div>
+        <div class="guest"><b>Sarinha</b> <span class="role">— Invitado especial</span></div>
+        <div class="guest"><b>RedstoneCanarias</b> <span class="role">— Invitado especial</span></div>
+        <div class="guest"><b>?</b> <span class="role">— Invitado especial</span></div>
+      </div>
+    </section>
+
+    <div class="divider-anim"></div>
+
+    <!-- Créditos -->
+    
+
+    <section class="card">
+      <h2>Cómo prepararte</h2>
+      <p>Vestimenta sugerida: <strong>elegante</strong>. No es obligatorio, pero contribuye a la atmósfera ✨</p>
+      <p>Para la mejor experiencia, abrí el contador en pantalla completa y con buen audio.</p>
+    </section>
+  </main>
+
+  
+  <footer class="footer">© <span id="year"></span> La Gala — Minecraft</footer>
+
+  <div class="footer" style="padding-bottom:30px;">
+    Nomi<br>
+    Zerah<br>
+    Luki
+  </div>
+
+
+  <!-- Botón verde único de playlist -->
+  <a class="spotify-fab" href="https://open.spotify.com/playlist/667pJ8ghnKVWUZqSotTCYy?si=574a97ebadc548d1" target="_blank" aria-label="Abrir la playlist en Spotify">
+    🎷 Playlist de La Gala
+  </a>
+
+  <script>
+    // Año
+    document.getElementById('year').textContent=new Date().getFullYear();
+
+    // Banner de fecha con hora local y mini-countdown
+    (function(){
+      const galaISO = '2025-09-07T22:00:00-03:00'; // Domingo 7/9, 22:00 Uruguay (-03)
+      const target = new Date(galaISO);
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit' };
+      const local = new Intl.DateTimeFormat(undefined, opts).format(target);
+      document.getElementById('uy').textContent = 'Dom 7 de septiembre • 22:00 (Uruguay)';
+      const localEl = document.getElementById('local');
+      if (localEl) localEl.textContent = `Tu hora: ${local} — ${tz}`;
+
+      const dEl=document.getElementById('d'), hEl=document.getElementById('h'), mEl=document.getElementById('m'), sEl=document.getElementById('s');
+      function pad(n){ return String(n).padStart(2,'0'); }
+      function tick(){
+        const now = new Date();
+        let diff = target - now;
+        if (diff <= 0){
+          dEl.textContent = hEl.textContent = mEl.textContent = sEl.textContent = '00';
+          return;
+        }
+        const sec = Math.floor(diff/1000);
+        const d = Math.floor(sec/86400);
+        const h = Math.floor((sec%86400)/3600);
+        const m = Math.floor((sec%3600)/60);
+        const s = Math.floor(sec%60);
+        dEl.textContent = pad(d); hEl.textContent = pad(h); mEl.textContent = pad(m); sEl.textContent = pad(s);
+      }
+      tick(); setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>
