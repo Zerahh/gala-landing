@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inscripción de Candidatos – Alcaldía del Pueblo (Servidor de Mods)</title>
+  <meta name="description" content="Formulario oficial para postularse como candidato/a a la Alcaldía del Pueblo. Extensión de La Gala." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{ --gala-gold:#d4af37;--deep:#120a0a;--red:#5a0f16;--paper:#f7f2e7;--ink:#222;--muted:#c7bca0; }
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;color:var(--paper);background:
+      radial-gradient(1200px 700px at 10% -20%,rgba(212,175,55,.15),transparent 60%),
+      radial-gradient(1000px 600px at 90% 0,rgba(212,175,55,.09),transparent 60%),
+      linear-gradient(180deg,#1b0e0e,#120a0a 30%,#0c0707 100%)}
+    a{color:var(--gala-gold);text-decoration:none}
+    .container{max-width:900px;margin-inline:auto;padding:20px}
+    .frame{position:relative;border:2px solid rgba(212,175,55,.35);border-radius:18px;box-shadow:0 0 0 4px rgba(212,175,55,.08) inset, 0 12px 40px rgba(0,0,0,.5);overflow:hidden;background:linear-gradient(180deg, rgba(90,15,22,.6), rgba(90,15,22,.25));}
+    .frame::before{content:"";position:absolute;inset:0;border:1px solid rgba(212,175,55,.35);border-radius:14px;margin:10px;pointer-events:none}
+    header.hero{padding:48px 20px;text-align:center}
+    .brand{display:inline-flex;align-items:center;gap:12px;margin-bottom:10px}
+    .brand .seal{width:40px;height:40px;border-radius:999px;border:1px solid rgba(212,175,55,.6);display:grid;place-items:center;background:rgba(212,175,55,.1)}
+    h1.title{font-family:Cinzel,serif;font-weight:800;letter-spacing:.02em;margin:0 0 10px;font-size:clamp(26px,6vw,46px);color:var(--gala-gold);text-shadow:0 2px 0 #000}
+    p.subtitle{margin:0 0 18px;opacity:.9}
+    .dates{display:inline-flex;gap:16px;flex-wrap:wrap;justify-content:center;opacity:.95}
+    .chip{border:1px solid rgba(212,175,55,.35);border-radius:999px;padding:8px 12px;background:rgba(212,175,55,.08)}
+    .section{padding:22px}
+    .section h2{font-family:Cinzel,serif;font-size:clamp(20px,4.6vw,30px);color:var(--gala-gold);margin:0 0 12px}
+    .lead{opacity:.92;margin:4px 0 18px}
+    form.form{background:rgba(0,0,0,.35);border:1px solid rgba(212,175,55,.25);border-radius:14px;padding:16px;display:grid;gap:14px}
+    label{display:block;font-weight:600;margin-bottom:6px}
+    input[type="text"],input[type="url"],textarea,select{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(212,175,55,.25);background:rgba(15,10,10,.6);color:var(--paper)}
+    textarea{min-height:120px;resize:vertical}
+    .row{display:grid;gap:12px}
+    @media(min-width:720px){.row{grid-template-columns:1fr 1fr}}
+    .help{opacity:.8;font-size:14px}
+    .muted{opacity:.8}
+    .counter{font-size:12px;opacity:.8;float:right}
+    .check{display:flex;align-items:flex-start;gap:10px}
+    .check input{margin-top:2px}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:10px;border:1px solid rgba(212,175,55,.35);background:linear-gradient(180deg,#d4af37,#b6912f);color:#201a0a;font-weight:800}
+    .btn.ghost{background:rgba(212,175,55,.08);color:var(--paper)}
+    .note{background:rgba(0,0,0,.35);border:1px solid rgba(212,175,55,.25);border-radius:14px;padding:16px;margin-top:16px}
+    .note h3{margin:0 0 10px;color:var(--gala-gold);font-family:Cinzel,serif}
+    footer{padding:22px;text-align:center;opacity:.9}
+    .warn{background:#3a221e;border:1px solid #8a5a42;border-radius:10px;padding:10px;font-size:14px;margin-top:8px}
+    code.inline{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);padding:2px 6px;border-radius:6px}
+  
+    /* ---- Decoraciones adicionales ---- */
+    .frame{isolation:isolate}
+    /* Partículas doradas sutiles */
+    .frame::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background-image:
+        radial-gradient(4px 4px at 10% 20%, rgba(212,175,55,.25) 0 40%, transparent 41%),
+        radial-gradient(3px 3px at 80% 30%, rgba(212,175,55,.20) 0 40%, transparent 41%),
+        radial-gradient(2px 2px at 35% 75%, rgba(212,175,55,.18) 0 40%, transparent 41%),
+        radial-gradient(2px 2px at 65% 60%, rgba(212,175,55,.18) 0 40%, transparent 41%);
+      filter: blur(.2px); opacity:.55;
+    }
+    /* Esquinas doradas */
+    .ornament{position:absolute;width:22px;height:22px;border:2px solid rgba(212,175,55,.5)}
+    .ornament.tl{top:10px;left:10px;border-right:none;border-bottom:none;border-radius:8px 0 0 0}
+    .ornament.tr{top:10px;right:10px;border-left:none;border-bottom:none;border-radius:0 8px 0 0}
+    .ornament.bl{bottom:10px;left:10px;border-right:none;border-top:none;border-radius:0 0 0 8px}
+    .ornament.br{bottom:10px;right:10px;border-left:none;border-top:none;border-radius:0 0 8px 0}
+    /* Separador decorativo */
+    .divider{height:22px; margin: 4px 22px 18px; position:relative}
+    .divider:before, .divider:after{
+      content:""; position:absolute; top:50%; width:40%; height:2px; background:linear-gradient(90deg, rgba(212,175,55,.0), rgba(212,175,55,.6));
+      transform:translateY(-50%);
+    }
+    .divider:before{left:0}
+    .divider:after{right:0; transform:translateY(-50%) scaleX(-1)}
+    .divider i{
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      width:18px; height:18px; border:2px solid rgba(212,175,55,.6); border-radius:6px; box-shadow:0 0 0 2px rgba(212,175,55,.15) inset;
+    }
+
+  
+    
+  
+    /* ===== Timeline visual horizontal con progreso ===== */
+    .timeline{position:relative;margin:18px 10px 26px;padding:26px 10px}
+    .timeline .track{position:relative;height:4px;background:linear-gradient(90deg, rgba(212,175,55,.25), rgba(212,175,55,.15));border-radius:6px;overflow:hidden}
+    .timeline .progress{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,#d4af37,#b6912f);box-shadow:0 0 10px rgba(212,175,55,.35);transition:width .8s ease}
+    .timeline .steps{display:grid;grid-template-columns:repeat(8,1fr);gap:14px;align-items:start;margin-top:14px}
+    .timeline .step{position:relative;text-align:center}
+    .timeline .dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(212,175,55,.9);background:rgba(212,175,55,.25);margin:0 auto;position:relative;top:-11px;transition:transform .25s ease}
+    .timeline .step.active .dot{background:#d4af37;box-shadow:0 0 10px rgba(212,175,55,.6);transform:scale(1.1)}
+    .timeline .label{font-weight:600;margin-top:2px}
+    .timeline .meta{font-size:12px;opacity:.9}
+    @media(max-width:760px){
+      .timeline .steps{grid-template-columns:repeat(4,1fr)}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="frame">
+      <span class="ornament tl"></span><span class="ornament tr"></span><span class="ornament bl"></span><span class="ornament br"></span>
+      <header class="hero">
+        <div class="brand"><span class="seal">🏛️</span><small>Extensión de La Gala</small></div>
+        <h1 class="title">Inscripción de Candidatos – Alcaldía del Pueblo</h1>
+        <p class="subtitle">Abrimos la convocatoria para elegir a quienes representarán al pueblo en el servidor de mods.</p>
+        
+      </header>
+
+      
+      <section class="section" id="cronograma">
+        <h2>Cronograma</h2>
+        <div class="timeline" id="tl">
+          <div class="track"><div class="progress" id="tlProgress"></div></div>
+          <div class="steps">
+            <div class="step" data-start="2025-10-01" data-end="2025-10-07">
+              <div class="dot"></div>
+              <div class="label">Postulación</div>
+              <div class="meta">1–7 oct</div>
+            </div>
+            <div class="step" data-start="2025-10-08" data-end="2025-10-08">
+              <div class="dot"></div>
+              <div class="label">Listas aprobadas</div>
+              <div class="meta">8 oct</div>
+            </div>
+            <div class="step" data-start="2025-10-09" data-end="2025-10-18">
+              <div class="dot"></div>
+              <div class="label">Campaña</div>
+              <div class="meta">9–18 oct</div>
+            </div>
+            <div class="step" data-start="2025-10-12" data-end="2025-10-12">
+              <div class="dot"></div>
+              <div class="label">Debate</div>
+              <div class="meta">12 oct</div>
+            </div>
+            <div class="step" data-start="2025-10-19" data-end="2025-10-20">
+              <div class="dot"></div>
+              <div class="label">Votación</div>
+              <div class="meta">19–20 oct</div>
+            </div>
+            <div class="step" data-start="2025-10-21" data-end="2025-10-21">
+              <div class="dot"></div>
+              <div class="label">Resultados prov.</div>
+              <div class="meta">21 oct</div>
+            </div>
+            <div class="step" data-start="2025-10-21" data-end="2025-10-22">
+              <div class="dot"></div>
+              <div class="label">Impugnaciones</div>
+              <div class="meta">21–22 oct</div>
+            </div>
+            <div class="step" data-start="2025-10-23" data-end="2025-10-23">
+              <div class="dot"></div>
+              <div class="label">Proclamación</div>
+              <div class="meta">23 oct</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <section class="section">
+        <h2>Postulate acá</h2>
+        <p class="lead">Completá el formulario. Si cumplís los requisitos, la Junta Electoral te aprueba y tu campaña aparecerá en la página oficial.</p>
+
+        <!-- FORMULARIO PERSONALIZADO CON ENVÍO A GOOGLE FORMS -->
+        
+
+        <form class="form" id="form-candidato" method="POST" target="_blank">
+          <div class="row">
+            <div>
+              <label for="mcname">Usuario de Minecraft</label>
+              <input type="text" id="mcname" placeholder="Ej: YamilNico_" required />
+              <div class="help">Debe ser el nick con el que jugás en el servidor.</div>
+            </div>
+            <div>
+              <label for="discord">Discord</label>
+              <input type="text" id="discord" placeholder="Ej: yamil#1234" required />
+              <div class="help">Se usará para coordinar comunicaciones de campaña.</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="nombre">Nombre de candidatura</label>
+              <input type="text" id="nombre" placeholder="Ej: Bloques al Sol" maxlength="40" />
+              <div class="counter" data-for="nombre">0 / 40</div>
+            </div>
+            <div>
+              <label for="lema">Lema (máx. 60)</label>
+              <input type="text" id="lema" placeholder="Ej: Más cultivos, menos creepers" maxlength="60" />
+              <div class="counter" data-for="lema">0 / 60</div>
+            </div>
+          </div>
+
+          <div>
+            <label for="resumen">Resumen de campaña (máx. 280)</label>
+            <textarea id="resumen" placeholder="Decí en una o dos frases qué proponés" maxlength="280"></textarea>
+            <div class="counter" data-for="resumen">0 / 280</div>
+          </div>
+
+          <div>
+            <label for="propuestas">Propuestas principales</label>
+            <textarea id="propuestas" placeholder="Enumerá 3–6 propuestas claras. Ej: muralla perimetral, mercado semanal, kit para novatos…"></textarea>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="skin">Render/Imagen de tu skin (URL)</label>
+              <input type="url" id="skin" placeholder="https://… (PNG fondo transparente recomendado)" />
+              <div class="help">Podés pegar un link de Drive/Imgur con acceso público.</div>
+            </div>
+            <div>
+              <label for="carpeta">Carpeta con materiales (URL)</label>
+              <input type="url" id="carpeta" placeholder="https://… (afiches, logos, etc.)" />
+            </div>
+          </div>
+
+          <div>
+            <label for="servidor">Confirmá que estás activo en el servidor</label>
+            <select id="servidor" required>
+              <option value="">Seleccioná</option>
+              <option>Sí, jugué en los últimos 14 días</option>
+              <option>No aun (quiero regularizarme)</option>
+            </select>
+          </div>
+
+          <div class="check">
+            <input type="checkbox" id="reglas" required />
+            <label for="reglas">Acepto el <a href="#reglamento">Reglamento Electoral</a> y el <a href="#codigo">Código de Conducta</a>.</label>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn">Enviar postulación</button>
+            <a class="btn ghost" href="https://drive.google.com/file/d/1yBCyvXb4BQM1RiGmQuQ9wRSc-DEmxXRT/view?usp=sharing" target="_blank" rel="noopener">Descargar kit de campaña</a>
+          </div>
+          
+        </form>
+
+        <!-- PASO 2: CONFIG DE ENTRY IDS -->
+        <!-- INTEGRACIÓN DIRECTA CON GOOGLE FORMS (sin configuración visible) -->
+        
+      <section class="section" id="historia">
+        <h2>La historia de la Alcaldía</h2>
+        <div class="note">
+          <p>En los primeros días del Pueblo, cuando apenas se levantaban las primeras casas de madera y los cofres estaban llenos de piedra sin clasificar, reinaba el caos. Los aldeanos discutían por dónde cavar las minas, quién cuidaba los cultivos y hasta qué hacer con los creepers que aparecían de noche.</p>
+          <p>Fue entonces que la comunidad, reunida en la Plaza Central bajo las antorchas, decidió elegir a un <strong>Alcalde</strong>: una figura no de poder absoluto, sino de organización y representación. El Alcalde sería la voz del pueblo, el encargado de velar por el orden de las murallas, el abastecimiento del mercado y la coordinación de los grandes proyectos.</p>
+          <p>Así nació la tradición de la Alcaldía en el Pueblo del Servidor de Mods: un cargo simbólico pero vital, donde cada elección no solo define un líder, sino que fortalece el espíritu colectivo que mantiene unido al pueblo frente a los desafíos del mundo.</p>
+        </div>
+      </section>
+      <div class="divider"><i></i></div>
+
+      <section class="section" id="reglamento">
+        <h2>Reglamento Electoral (resumen)</h2>
+        <div class="note">
+          <ol>
+            <li><strong>Elegibilidad:</strong> 7 días de actividad mínima en el servidor de mods y respeto a las normas del servidor.</li>
+            <li><strong>Presentación:</strong> skin con <em>traje formal</em> obligatoria durante la campaña y el día de la elección.</li>
+            <li><strong>Campaña limpia:</strong> sin trolleo, spam o destrucción de cartelería ajena. Publicidad sólo en espacios habilitados.</li>
+            <li><strong>Gastos de campaña:</strong> permitidos en esmeraldas/recursos; prohibido el pago real. Transparencia si recibís donaciones.</li>
+            <li><strong>Debates:</strong> al menos un encuentro oficial moderado por la Junta Electoral.</li>
+            <li><strong>Votación:</strong> un voto por persona, validación por rol de Discord y/o firma en libro del servidor.</li>
+            <li><strong>Impugnaciones:</strong> 24 h tras resultados provisorios. Junta resuelve en 48 h.</li>
+          </ol>
+          
+        </div>
+      </section>
+
+      
+
+      <section class="section" id="codigo">
+        <h2>Código de conducta</h2>
+        <div class="note">
+          <p>Queremos una experiencia divertida y respetuosa. No discriminación, no acoso, no griefing. Respetá las construcciones y la creatividad de los demás. La Junta puede sancionar y excluir candidaturas que rompan el código.</p>
+        </div>
+      </section>
+
+      <footer>
+        <div>© Pueblo del Servidor de Mods — <em>Junta Electoral</em> · <a href="#" class="back">Volver a La Gala</a></div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Contadores visuales
+    function bindCounter(id){
+      const el = document.getElementById(id);
+      const ctr = document.querySelector(`.counter[data-for="${id}"]`);
+      if(!el || !ctr) return;
+      const update=()=>{ctr.textContent = `${el.value.length} / ${el.maxLength||el.value.length}`};
+      el.addEventListener('input',update); update();
+    }
+    ['nombre','lema','resumen'].forEach(bindCounter);
+
+    // CONFIG: completar con tus entry IDs del Google Forms
+    const ENTRY = {
+      formId: '1FAIpQLSdeBYjN5tWA3EwYRfflcptf0LiwfLamKYNvfSPwVXhcNdUxkA',
+      mcname: '626828554',
+      discord: '1772951872',
+      nombre: '639383785',
+      lema: '1628841165',
+      resumen: '783992461',
+      propuestas: '889464660',
+      skin: '671062738',
+      carpeta: '1483764274',
+      servidor: '2095245261'
+    };
+
+    // (Configuración por UI eliminada; entries fijados arriba)
+    // Enviar al endpoint de Google Forms
+    const form = document.getElementById('form-candidato');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      // Chequeo mínimo de campos obligatorios
+      const requiredIds = ['mcname','discord','servidor'];
+      for(const id of requiredIds){ const f=document.getElementById(id); if(!f || !f.value.trim()){ alert('Completá todos los campos obligatorios.'); return; } }
+      if(!document.getElementById('reglas').checked){ alert('Debés aceptar el Reglamento.'); return; }
+
+      // Chequeo de entries
+      const keys = ['mcname','discord','nombre','lema','resumen','propuestas','skin','carpeta','servidor'];
+      for(const k of keys){ if(ENTRY[k] && !isEntry(ENTRY[k])){ alert(`El ID de entry para "${k}" no parece válido. Debe ser numérico.`); return; } }
+
+      // Armar URL de envío
+      const base = `https://docs.google.com/forms/d/e/${ENTRY.formId || '1FAIpQLSdeBYjN5tWA3EwYRfflcptf0LiwfLamKYNvfSPwVXhcNdUxkA'}/formResponse`;
+      const params = new URLSearchParams();
+      const map = [
+        ['mcname','mcname'], ['discord','discord'], ['nombre','nombre'], ['lema','lema'], ['resumen','resumen'],
+        ['propuestas','propuestas'], ['skin','skin'], ['carpeta','carpeta'], ['servidor','servidor']
+      ];
+      for(const [id,key] of map){
+        const val = document.getElementById(id).value.trim();
+        const entry = ENTRY[key];
+        if(entry){ params.append(`entry.${entry}`, val); }
+      }
+
+      // Abrir envío en nueva pestaña para ver confirmación de Google
+      const url = base + '?' + params.toString();
+      window.open(url, '_blank');
+    });
+    // Autocompletar ENTRY IDs al pegar el link prellenado
+    (function(){
+      const urlInput = document.getElementById('prefilledUrl');
+      if(!urlInput) return;
+      urlInput.addEventListener('input', ()=>{
+        try{
+          const u = new URL(urlInput.value.trim());
+          const qp = u.searchParams;
+          // Si viene otro FORM_ID, lo actualizamos
+          const path = u.pathname; // /forms/d/e/FORM_ID/viewform
+          const parts = path.split('/');
+          const idx = parts.indexOf('e');
+          if(idx>-1 && parts[idx+1]){
+            const fid = parts[idx+1];
+            const formIdEl = document.getElementById('formId');
+            if(formIdEl){ formIdEl.value = fid; ENTRY.formId = fid; }
+          }
+          // Recorremos todas las params y autollenamos los inputs e_*
+          qp.forEach((val,key)=>{
+            if(key.startsWith('entry.')){
+              // Mapear por heurística según orden probable y contenido de val
+              // Permitimos al usuario reordenar luego manualmente
+              const free = ['e_mcname','e_discord','e_nombre','e_lema','e_resumen','e_propuestas','e_skin','e_carpeta','e_servidor']
+                            .map(id=>document.getElementById(id))
+                            .filter(el=>el && !el.value);
+              if(free.length){ free[0].value = key.replace('entry.',''); free[0].dispatchEvent(new Event('input')); }
+            }
+          });
+        }catch(e){ /* ignore */ }
+      });
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const tl = document.getElementById('tl');
+      if(!tl) return;
+      const steps = Array.from(tl.querySelectorAll('.step'));
+      const progress = document.getElementById('tlProgress');
+      const now = new Date(); // fecha actual del cliente
+      // rango global
+      const start = new Date(steps[0].dataset.start);
+      const end   = new Date(steps[steps.length-1].dataset.end);
+      const total = end - start;
+      let pct = 0;
+      steps.forEach((s, idx)=>{
+        const a = new Date(s.dataset.start);
+        const b = new Date(s.dataset.end);
+        if(now >= a && now <= b){ s.classList.add('active'); }
+      });
+      if(now <= start){ pct = 0; }
+      else if(now >= end){ pct = 100; steps[steps.length-1].classList.add('active'); }
+      else { pct = ((now - start) / total) * 100; }
+      progress.style.width = pct + '%';
+    })();
+  </script>
+
+</body>
+</html>
